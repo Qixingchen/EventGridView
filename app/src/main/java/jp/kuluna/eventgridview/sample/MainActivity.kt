@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         adapter = EventGridAdapter(this)
         binding.eventGridView.adapter = adapter
+        binding.eventGridView.hourHeight = 60
+        binding.eventGridView.titleHeight = 40
         showEvents()
     }
 
@@ -37,8 +39,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showEvents() {
-        val period = Random().nextInt(24)
-        val startedAt = Date()
+        val period = 3
+        val startedAt = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 11)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }.time
         val endedAt = Calendar.getInstance().apply {
             time = startedAt
             add(Calendar.HOUR_OF_DAY, period)

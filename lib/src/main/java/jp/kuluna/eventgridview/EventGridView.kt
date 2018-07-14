@@ -21,6 +21,14 @@ class EventGridView : FrameLayout {
             }
         }
 
+    var hourHeight: Int
+        get() {
+            return binding.hourHeight ?: 40
+        }
+        set(value) {
+            binding.hourHeight = value
+        }
+
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 

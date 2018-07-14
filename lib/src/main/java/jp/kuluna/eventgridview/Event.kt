@@ -20,11 +20,13 @@ data class Event(
         @ColorInt var backgroundColor: Int,
         /** テキストの文字色 */
         @ColorInt var textColor: Int,
-        /** イベント内に表示するアイコン */
+        /** イベント内に表示するアイコン
+         * Icon to display in the event */
         var icon: Bitmap? = null,
         /** 追加で保持したい値がある場合はここに代入 */
         var extra: String? = null,
-        /** イベントのドラッグが可能かどうかのフラグ */
+        /** イベントのドラッグが可能かどうかのフラグ
+         * is event draggable */
         var draggable: Boolean = false
 ) {
     companion object {
@@ -77,10 +79,11 @@ data class TimeParams(
 ) {
     companion object {
         fun from(y: Float, density: Float): TimeParams {
-            val roundY = (y / density / 10).roundToInt() * 10
-            return TimeParams(roundY / 40, (roundY % 40) / 10 * 15)
+            val roundY = (y * 10 / density).roundToInt() / 10 - 4
+            return TimeParams(roundY / DraggableEventGridListView.HourHeight, (roundY % DraggableEventGridListView.HourHeight) * DraggableEventGridListView.HourHeight / 60)
         }
     }
 
-    val fromY = ((hour * 40) + (min * 10 / 15))
+    val fromY = ((hour * DraggableEventGridListView.HourHeight) + (min * DraggableEventGridListView.HourHeight / 60)) + 4
+//    val fromY = hour * 40
 }

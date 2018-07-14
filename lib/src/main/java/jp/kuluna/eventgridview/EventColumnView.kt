@@ -42,7 +42,7 @@ open class EventColumnView(context: Context) : FrameLayout(context) {
     /** EventをタップしたときのY座標(px) */
     private var adjustStartTapY = 0f
     /** Eventの横幅(dp) */
-    private val widthDp = 48
+    var widthDp = 100
     /** Eventの最低の高さ */
     private var minEventHeight = convertPxToRoundedDp(90.0F) // 固定値にしてあります
     /** Eventの高さ最大値 */

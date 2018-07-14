@@ -20,6 +20,11 @@ class DraggableEventGridListView : FrameLayout {
     /** イベントドラッグ時の自動スクロール用Handler */
     private lateinit var handler: ScrollHandler
 
+    companion object {
+        var HourHeight: Int = 40
+        var TitleHeight = 40
+    }
+
     constructor(context: Context) : super(context) {
         load()
     }
@@ -34,6 +39,22 @@ class DraggableEventGridListView : FrameLayout {
 
     val eventGridView: EventGridView
         get() = binding.eventGridView
+
+    var hourHeight: Int
+        get() = eventGridView.hourHeight
+        set(value) {
+            eventGridView.hourHeight = value
+            HourHeight = value
+        }
+
+    var titleHeight: Int
+        get() {
+            return binding.titleHeight ?: 40
+        }
+        set(value) {
+            binding.titleHeight = value
+            TitleHeight = value
+        }
 
     var adapter: EventGridAdapter?
         get() = eventGridView.adapter
