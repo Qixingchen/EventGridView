@@ -7,7 +7,7 @@ import org.apache.commons.lang.time.DateUtils
 import java.util.*
 import kotlin.math.roundToInt
 
-data class Event(
+class Event(
         /** 同じIDをまとめて1列に表示するためのID */
         var groupId: Int,
         /** group title, items in same group should have same title*/
@@ -74,6 +74,10 @@ data class Event(
 
     enum class CrossOver {
         None, ToNextDay, FromPreviousDay
+    }
+
+    fun copy(): Event {
+        return from(toBundle())
     }
 }
 
