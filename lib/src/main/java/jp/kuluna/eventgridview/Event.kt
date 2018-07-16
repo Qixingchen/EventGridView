@@ -7,7 +7,7 @@ import org.apache.commons.lang.time.DateUtils
 import java.util.*
 import kotlin.math.roundToInt
 
-class Event(
+open class Event(
         /** 同じIDをまとめて1列に表示するためのID */
         var groupId: Int,
         /** group title, items in same group should have same title*/
