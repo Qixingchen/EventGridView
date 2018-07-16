@@ -23,6 +23,7 @@ class DraggableEventGridListView : FrameLayout {
     companion object {
         var HourHeight: Int = 40
         var TitleHeight = 40
+        var GroupWidth = 80
     }
 
     constructor(context: Context) : super(context) {
@@ -49,11 +50,21 @@ class DraggableEventGridListView : FrameLayout {
 
     var titleHeight: Int
         get() {
-            return binding.titleHeight ?: 40
+            return eventGridView.titleHeight
         }
         set(value) {
-            binding.titleHeight = value
+            eventGridView.titleHeight = value
             TitleHeight = value
+        }
+
+    var groupWidth: Int
+        get() {
+            return GroupWidth
+        }
+        set(value) {
+            GroupWidth = value
+            eventGridView.adapter?.groupWidth = value
+            eventGridView.titleAdapter.widthChange()
         }
 
     var adapter: EventGridAdapter?
@@ -64,12 +75,12 @@ class DraggableEventGridListView : FrameLayout {
                 if (it.action == DragEvent.ACTION_DRAG_ENDED) {
                     handler.removeMessageAll()
                 } else if (it.action != DragEvent.ACTION_DRAG_EXITED) {
-                    val frameY = it.y - binding.scrollView.scrollY
-                    when {
-                        frameY < height * 0.1 -> handler.moveToTop()
-                        frameY > height * 0.9 -> handler.moveToBottom()
-                        else -> handler.removeMessageAll()
-                    }
+//                    val frameY = it.y - binding.scrollView.scrollY
+//                    when {
+//                        frameY < height * 0.1 -> handler.moveToTop()
+//                        frameY > height * 0.9 -> handler.moveToBottom()
+//                        else -> handler.removeMessageAll()
+//                    }
                 }
             }
 
@@ -90,7 +101,7 @@ class DraggableEventGridListView : FrameLayout {
 
     private fun load() {
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.view_event_list, this, true)
-        handler = ScrollHandler(binding.scrollView)
+//        handler = ScrollHandler(binding.scrollView)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

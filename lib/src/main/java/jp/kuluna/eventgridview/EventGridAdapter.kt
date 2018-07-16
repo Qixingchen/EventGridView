@@ -46,18 +46,28 @@ open class EventGridAdapter(val context: Context) : RecyclerView.Adapter<EventGr
                 -1
             }
         }
+
+    var groupWidth: Int = DraggableEventGridListView.GroupWidth
+        set(value) {
+            notifyDataSetChanged()
+        }
     /** EventViewColumnで生成されたのEventView格納用 */
     private var eventViews = mutableListOf<View>()
     /** ViewHolder全体のEventViewの配列の格納用 */
     private var eventViewGroup = mutableListOf<List<View>>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventGridViewHolder = EventGridViewHolder(EventColumnView(context))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventGridViewHolder {
+        val eventColumnView = EventColumnView(context)
+        eventColumnView.widthDp = groupWidth
+        return EventGridViewHolder(eventColumnView)
+    }
 
     override fun getItemCount(): Int = group.size
 
     override fun onBindViewHolder(holder: EventGridViewHolder, position: Int) {
         val event = group[holder.layoutPosition].second
         holder.view.set(day, event, holder.layoutPosition)
+        holder.view.widthDp = DraggableEventGridListView.GroupWidth
         holder.view.onEventClickListener = {
             onEventClickListener?.onEventClick(it)
         }
@@ -79,7 +89,6 @@ open class EventGridAdapter(val context: Context) : RecyclerView.Adapter<EventGr
             events[index].end = new.end
             scaleRefresh()
         }
-
         eventViews = holder.view.eventViews
         eventViewGroup.add(eventViews)
     }

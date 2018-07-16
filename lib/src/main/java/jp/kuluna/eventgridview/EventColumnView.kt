@@ -42,7 +42,13 @@ open class EventColumnView(context: Context) : FrameLayout(context) {
     /** EventをタップしたときのY座標(px) */
     private var adjustStartTapY = 0f
     /** Eventの横幅(dp) */
-    var widthDp = 100
+    var widthDp = DraggableEventGridListView.GroupWidth
+        set(value) {
+            layoutParams = FrameLayout.LayoutParams((value * density).toInt(), FrameLayout.LayoutParams.MATCH_PARENT).apply {
+                this.setMargins(density.toInt(), 0, density.toInt(), 0)
+            }
+            requestLayout()
+        }
     /** Eventの最低の高さ */
     private var minEventHeight = convertPxToRoundedDp(90.0F) // 固定値にしてあります
     /** Eventの高さ最大値 */

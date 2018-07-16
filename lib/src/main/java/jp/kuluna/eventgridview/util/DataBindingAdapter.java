@@ -14,4 +14,12 @@ public class DataBindingAdapter {
     public static void setHeight(View view, int height) {
         view.getLayoutParams().height = Math.round(height * view.getContext().getResources().getDisplayMetrics().density + 0.5f);
     }
+
+    /**
+     * set view height using data binding
+     */
+    @BindingAdapter({"layout_width"})
+    public static void setWidth(View view, int width) {
+        view.getLayoutParams().width = Math.round(width * view.getContext().getResources().getDisplayMetrics().density + 0.5f);
+    }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="height"
+            type="Integer"/>
+
+        <variable
+            name="width"
+            type="Integer"/>
+
+        <variable
+            name="title"
+            type="String"/>
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@{title}"
+        app:layout_height="@{height}"
+        app:layout_width="@{width}"
+        tools:text="sample title">
+
+    </TextView>
+</layout>

@@ -10,6 +10,8 @@ import kotlin.math.roundToInt
 data class Event(
         /** 同じIDをまとめて1列に表示するためのID */
         var groupId: Int,
+        /** group title, items in same group should have same title*/
+        var groupTitle: String,
         /** 開始時間 */
         var start: Date,
         /** 終了時間 */
@@ -32,6 +34,7 @@ data class Event(
     companion object {
         fun from(bundle: Bundle) = Event(
                 bundle.getInt("groupId"),
+                bundle.getString("groupTitle"),
                 Date(bundle.getLong("start")),
                 Date(bundle.getLong("end")),
                 bundle.getString("text"),
@@ -45,6 +48,7 @@ data class Event(
 
     fun toBundle() = Bundle().apply {
         putInt("groupId", groupId)
+        putString("groupTitle", groupTitle)
         putLong("start", start.time)
         putLong("end", end.time)
         putString("text", text)

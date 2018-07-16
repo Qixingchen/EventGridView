@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import jp.kuluna.eventgridview.Event
 import jp.kuluna.eventgridview.EventGridAdapter
 import jp.kuluna.eventgridview.sample.databinding.ActivityMainBinding
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding.eventGridView.adapter = adapter
         binding.eventGridView.hourHeight = 60
         binding.eventGridView.titleHeight = 40
+        binding.eventGridView.groupWidth = 40
         showEvents()
     }
 
@@ -39,6 +41,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showEvents() {
+
+        binding.eventGridView.groupWidth = Random().nextInt(40) + 40
+
+        Toast.makeText(this, binding.eventGridView.groupWidth.toString(), Toast.LENGTH_LONG).show()
+
         val period = 3
         val startedAt = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, 11)
@@ -55,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         val events: List<Event> = ArrayList<Event>().apply {
             add(Event(
                     0,
+                    "1",
                     startedAt,
                     endedAt,
                     "ドラッグ不可",
@@ -66,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 
             add(Event(
                     1,
+                    "2",
                     startedAt,
                     endedAt,
                     "ドラッグ可",
@@ -76,6 +85,6 @@ class MainActivity : AppCompatActivity() {
                     true))
         }
 
-        adapter.replace(events, Date())
+        binding.eventGridView.eventGridView.replace(events, Date())
     }
 }
