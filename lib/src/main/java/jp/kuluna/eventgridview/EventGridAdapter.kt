@@ -33,19 +33,8 @@ open class EventGridAdapter(val context: Context) : RecyclerView.Adapter<EventGr
     private val lastEnd
         get() = events.maxBy { it.end }?.end
     /** 24時間を超えた時間 */
-    val overTime: Int
-        get() {
-            val selectCal = Calendar.getInstance()
-            selectCal.time = day
-            val lastEndCal = Calendar.getInstance()
-            lastEndCal.time = lastEnd ?: day
+    val overTime: Int = 0
 
-            return if (selectCal.get(Calendar.DATE) != lastEndCal.get(Calendar.DATE)) {//日跨ぎ有り
-                lastEndCal.get(Calendar.HOUR_OF_DAY)
-            } else {//日跨ぎ無し
-                -1
-            }
-        }
 
     var groupWidth: Int = DraggableEventGridListView.GroupWidth
         set(value) {
