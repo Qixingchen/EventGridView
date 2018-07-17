@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding.eventGridView.hourHeight = 60
         binding.eventGridView.titleHeight = 40
         binding.eventGridView.groupWidth = 40
+        binding.eventGridView.post {
+            binding.eventGridView.eventGridView.scrollToHour(6)
+        }
+
         showEvents()
     }
 

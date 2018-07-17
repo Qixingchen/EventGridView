@@ -96,4 +96,8 @@ class EventGridView : FrameLayout {
         binding.groupTitle.addOnScrollListener(scrollListeners[0])
         binding.eventGridRecyclerView.addOnScrollListener(scrollListeners[1])
     }
+
+    fun scrollToHour(hour: Int) {
+        binding.scrollView.scrollY = ((hour * DraggableEventGridListView.HourHeight - 4) * context.resources.displayMetrics.density).toInt()
+    }
 }
